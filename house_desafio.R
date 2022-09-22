@@ -2,7 +2,8 @@
 library(tidyverse)
 library(tidymodels)
 library(ggcorrplot)
-
+library(generics)
+library(parsnip)
 options(scipen=999) 
 
 #
@@ -49,6 +50,7 @@ ggcorrplot(corr,
            title="Correlação", 
            ggtheme=theme_bw)
 
+#ajuste do modelo
 
 fit0 = lm(price~bedrooms + bathrooms+sqft_living + sqft_lot + floors+
             waterfront+ view + condition + yr_built, data = df)
@@ -74,11 +76,17 @@ df_train <- rsample::training(df_split)
 # usa 20% dos dados para validacao
 df_test  <-  rsample::testing(df_split)
 
+# valores preditos
 
-dim(df_train) # dimensao dos dados de treinamento
-dim(df_test ) # dimensao dos dados de validacao
+pv <-predict(fit,df_test) # na amostra de validacao
 
+a<-df_test %>% 
+  select(price) %>% 
+  bind_cols(predict(fit,df_test))
 
+#metricas para reg linear 
+
+#graficos de desempenho: predicao vs valores observados, r2
 
 
 
