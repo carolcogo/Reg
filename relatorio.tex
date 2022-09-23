@@ -1,0 +1,345 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\usepackage[left=1.7cm, right=1.7cm, top=3cm, bottom=3cm]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage[brazil]{babel}
+\usepackage{bm}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Modelagem via regressão linear do preço de imovéis},
+  pdfauthor={Caroline Cogo},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Modelagem via regressão linear do preço de imovéis}
+\author{Caroline Cogo\footnote{\href{mailto:carolcogo808@gmail.com}{\nolinkurl{carolcogo808@gmail.com}}}}
+\date{setembro 2022}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\clearpage
+
+\hypertarget{introduuxe7uxe3o}{%
+\section{Introdução}\label{introduuxe7uxe3o}}
+
+Assim, a proposta é definir um modelo de regressão linear que seja capaz de predizer a variável y, e quanto as covariáveis influenciam na média de y. Para a validação deste modelo será utilizado critérios de seleção, gráficos, entre outros.
+
+\hypertarget{importando-os-dados}{%
+\subsection{Importando os dados}\label{importando-os-dados}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados}\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"house\_data.csv"}\NormalTok{,}\AttributeTok{h=}\NormalTok{T) }
+
+\FunctionTok{glimpse}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Rows: 21,613
+## Columns: 21
+## $ id            <dbl> 7.13e+09, 6.41e+09, 5.63e+09, 2.49e+09, 1.95e+09, 7.24e+~
+## $ date          <chr> "20141013T000000", "20141209T000000", "20150225T000000",~
+## $ price         <dbl> 221900, 538000, 180000, 604000, 510000, 1225000, 257500,~
+## $ bedrooms      <int> 3, 3, 2, 4, 3, 4, 3, 3, 3, 3, 3, 2, 3, 3, 5, 4, 3, 4, 2,~
+## $ bathrooms     <dbl> 1.00, 2.25, 1.00, 3.00, 2.00, 4.50, 2.25, 1.50, 1.00, 2.~
+## $ sqft_living   <int> 1180, 2570, 770, 1960, 1680, 5420, 1715, 1060, 1780, 189~
+## $ sqft_lot      <int> 5650, 7242, 10000, 5000, 8080, 101930, 6819, 9711, 7470,~
+## $ floors        <dbl> 1.0, 2.0, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1~
+## $ waterfront    <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ view          <int> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,~
+## $ condition     <int> 3, 3, 3, 5, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 3, 3, 3, 4, 4,~
+## $ grade         <int> 7, 7, 6, 7, 8, 11, 7, 7, 7, 7, 8, 7, 7, 7, 7, 9, 7, 7, 7~
+## $ sqft_above    <int> 1180, 2170, 770, 1050, 1680, 3890, 1715, 1060, 1050, 189~
+## $ sqft_basement <int> 0, 400, 0, 910, 0, 1530, 0, 0, 730, 0, 1700, 300, 0, 0, ~
+## $ yr_built      <int> 1955, 1951, 1933, 1965, 1987, 2001, 1995, 1963, 1960, 20~
+## $ yr_renovated  <int> 0, 1991, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,~
+## $ zipcode       <int> 98178, 98125, 98028, 98136, 98074, 98053, 98003, 98198, ~
+## $ lat           <dbl> 47.5, 47.7, 47.7, 47.5, 47.6, 47.7, 47.3, 47.4, 47.5, 47~
+## $ long          <dbl> -122, -122, -122, -122, -122, -122, -122, -122, -122, -1~
+## $ sqft_living15 <int> 1340, 1690, 2720, 1360, 1800, 4760, 2238, 1650, 1780, 23~
+## $ sqft_lot15    <int> 5650, 7639, 8062, 5000, 7503, 101930, 6819, 9711, 8113, ~
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{head}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##         id            date   price bedrooms bathrooms sqft_living sqft_lot
+## 1 7.13e+09 20141013T000000  221900        3      1.00        1180     5650
+## 2 6.41e+09 20141209T000000  538000        3      2.25        2570     7242
+## 3 5.63e+09 20150225T000000  180000        2      1.00         770    10000
+## 4 2.49e+09 20141209T000000  604000        4      3.00        1960     5000
+## 5 1.95e+09 20150218T000000  510000        3      2.00        1680     8080
+## 6 7.24e+09 20140512T000000 1225000        4      4.50        5420   101930
+##   floors waterfront view condition grade sqft_above sqft_basement yr_built
+## 1      1          0    0         3     7       1180             0     1955
+## 2      2          0    0         3     7       2170           400     1951
+## 3      1          0    0         3     6        770             0     1933
+## 4      1          0    0         5     7       1050           910     1965
+## 5      1          0    0         3     8       1680             0     1987
+## 6      1          0    0         3    11       3890          1530     2001
+##   yr_renovated zipcode  lat long sqft_living15 sqft_lot15
+## 1            0   98178 47.5 -122          1340       5650
+## 2         1991   98125 47.7 -122          1690       7639
+## 3            0   98028 47.7 -122          2720       8062
+## 4            0   98136 47.5 -122          1360       5000
+## 5            0   98074 47.6 -122          1800       7503
+## 6            0   98053 47.7 -122          4760     101930
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{attach}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+O banco de dados é referente ao preço dos imóveis e outras 18 informações sobre a casa, das vendas realizadas entre maio de 2014 e maio de 2015 em King County , Washington. Possui 21613 observações e 21 variáveis, que estão descritas na Tabela \ref{tab:tab0}.
+
+\begin{table}[H]
+\caption{Descrição da váriaveis}\label{tab:tab0}
+\centering
+\begin{tabular}[t]{l|c}
+\hline
+Variável & Descrição\\
+\hline
+id & ID da casa vendida\\
+\hline
+date & Data da casa vendida\\
+\hline
+price & Preço da casa vendida\\
+\hline
+bedrooms & Número de quartos\\
+\hline
+batrooms & Número de banheiros \\
+\hline
+sqft_living & Metragem quadrada do espaço interior dos apartamentos\\
+\hline
+sqft_lot & Metragem quadrada do espaço terrestre\\
+\hline
+floors & Número de andares\\ 
+\hline
+waterfront &  Vista para a orla ou não\\
+\hline
+view  & índice de 0 a 4 de quão boa era a vista do imóvel\\
+\hline
+condition & índice de 1 a 5 sobre a condição do apartamento\\
+  \hline
+grade  & índice de 1 a 13 em relação a qualidade de construção e design\\
+\hline
+sqft_above  & a metragem quadrada do espaço interno da habitação que está acima do nível do solo\\
+\hline
+sqft_basement & a metragem quadrada do espaço de habitação inferior que está abaixo do nível do solo\\
+\hline
+yr_built  & O ano da casa foi construída inicialmente\\
+\hline
+yr_renovated  & O ano da última reforma da casa\\ 
+\hline
+zipcode & Em que área de código postal a casa está\\
+\hline
+lat & Latitude\\
+\hline
+long & Longitude\\
+\hline
+sqft_living15 & A metragem quadrada do espaço habitacional inferior para os 15 vizinhos mais próximos\\
+\hline
+sqft_lot15 & a metragem quadrada dos terrenos dos 15 vizinhos mais próximos\\
+\hline
+
+\end{tabular}
+\end{table}
+
+=`'floors',`waterfront',`view',`condition', `grade', `sqft\_lot15')
+
+\hypertarget{anuxe1lise-descritiva}{%
+\section{Análise descritiva}\label{anuxe1lise-descritiva}}
+
+Podemos avaliar pela Tabela \ref{tab:tab1}, um resumo das variáveis, com as medidas descritivas, contendo o valor mínimo, 1º quantil, mediana, valor médio, 3º quantil e valor máximo. É importante ressaltar, que a variável de desfecho preço dos imovéis, apresentou menor preço de 75000 dólares e preço máximo de 7700000 dólares.
+
+É importante examinar a correlação entre as covariáveis, pois devemos ter uma correlação ``aceitável'' entre a variável resposta e as covariáveis, o que entretanto, não pode acontecer entre as covariáveis, pois afeta negativamente o método de mínimos quadrados ordinários, e também pode ocorrer multicolinearidade.
+
+\begin{table}[H]
+
+\caption{\label{tab:tab2}Correlação entre as variáveis.}
+\centering
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+  & id & price & bedrooms & bathrooms & sqft\_living & sqft\_lot & floors & waterfront & view & condition & grade & sqft\_above & sqft\_basement & yr\_built & yr\_renovated & zipcode & lat & long & sqft\_living15 & sqft\_lot15\\
+\midrule
+id & 1.000 & -0.017 & 0.001 & 0.005 & -0.012 & -0.132 & 0.019 & -0.003 & 0.012 & -0.024 & 0.008 & -0.011 & -0.005 & 0.021 & -0.017 & -0.008 & -0.002 & 0.021 & -0.003 & -0.139\\
+price & -0.017 & 1.000 & 0.308 & 0.525 & 0.702 & 0.090 & 0.257 & 0.266 & 0.397 & 0.036 & 0.667 & 0.606 & 0.324 & 0.054 & 0.126 & -0.053 & 0.307 & 0.022 & 0.585 & 0.082\\
+bedrooms & 0.001 & 0.308 & 1.000 & 0.516 & 0.577 & 0.032 & 0.175 & -0.007 & 0.080 & 0.028 & 0.357 & 0.478 & 0.303 & 0.154 & 0.019 & -0.153 & -0.009 & 0.129 & 0.392 & 0.029\\
+bathrooms & 0.005 & 0.525 & 0.516 & 1.000 & 0.755 & 0.088 & 0.501 & 0.064 & 0.188 & -0.125 & 0.665 & 0.685 & 0.284 & 0.506 & 0.051 & -0.204 & 0.025 & 0.223 & 0.569 & 0.087\\
+sqft\_living & -0.012 & 0.702 & 0.577 & 0.755 & 1.000 & 0.173 & 0.354 & 0.104 & 0.285 & -0.059 & 0.763 & 0.877 & 0.435 & 0.318 & 0.055 & -0.199 & 0.053 & 0.240 & 0.756 & 0.183\\
+\addlinespace
+sqft\_lot & -0.132 & 0.090 & 0.032 & 0.088 & 0.173 & 1.000 & -0.005 & 0.022 & 0.075 & -0.009 & 0.114 & 0.184 & 0.015 & 0.053 & 0.008 & -0.130 & -0.086 & 0.230 & 0.145 & 0.719\\
+floors & 0.019 & 0.257 & 0.175 & 0.501 & 0.354 & -0.005 & 1.000 & 0.024 & 0.029 & -0.264 & 0.458 & 0.524 & -0.246 & 0.489 & 0.006 & -0.059 & 0.050 & 0.125 & 0.280 & -0.011\\
+waterfront & -0.003 & 0.266 & -0.007 & 0.064 & 0.104 & 0.022 & 0.024 & 1.000 & 0.402 & 0.017 & 0.083 & 0.072 & 0.081 & -0.026 & 0.093 & 0.030 & -0.014 & -0.042 & 0.086 & 0.031\\
+view & 0.012 & 0.397 & 0.080 & 0.188 & 0.285 & 0.075 & 0.029 & 0.402 & 1.000 & 0.046 & 0.251 & 0.168 & 0.277 & -0.053 & 0.104 & 0.085 & 0.006 & -0.078 & 0.280 & 0.073\\
+condition & -0.024 & 0.036 & 0.028 & -0.125 & -0.059 & -0.009 & -0.264 & 0.017 & 0.046 & 1.000 & -0.145 & -0.158 & 0.174 & -0.361 & -0.061 & 0.003 & -0.015 & -0.107 & -0.093 & -0.003\\
+\addlinespace
+grade & 0.008 & 0.667 & 0.357 & 0.665 & 0.763 & 0.114 & 0.458 & 0.083 & 0.251 & -0.145 & 1.000 & 0.756 & 0.168 & 0.447 & 0.014 & -0.185 & 0.114 & 0.198 & 0.713 & 0.119\\
+sqft\_above & -0.011 & 0.606 & 0.478 & 0.685 & 0.877 & 0.184 & 0.524 & 0.072 & 0.168 & -0.158 & 0.756 & 1.000 & -0.052 & 0.424 & 0.023 & -0.261 & -0.001 & 0.344 & 0.732 & 0.194\\
+sqft\_basement & -0.005 & 0.324 & 0.303 & 0.284 & 0.435 & 0.015 & -0.246 & 0.081 & 0.277 & 0.174 & 0.168 & -0.052 & 1.000 & -0.133 & 0.071 & 0.075 & 0.111 & -0.145 & 0.200 & 0.017\\
+yr\_built & 0.021 & 0.054 & 0.154 & 0.506 & 0.318 & 0.053 & 0.489 & -0.026 & -0.053 & -0.361 & 0.447 & 0.424 & -0.133 & 1.000 & -0.225 & -0.347 & -0.148 & 0.409 & 0.326 & 0.071\\
+yr\_renovated & -0.017 & 0.126 & 0.019 & 0.051 & 0.055 & 0.008 & 0.006 & 0.093 & 0.104 & -0.061 & 0.014 & 0.023 & 0.071 & -0.225 & 1.000 & 0.064 & 0.029 & -0.068 & -0.003 & 0.008\\
+\addlinespace
+zipcode & -0.008 & -0.053 & -0.153 & -0.204 & -0.199 & -0.130 & -0.059 & 0.030 & 0.085 & 0.003 & -0.185 & -0.261 & 0.075 & -0.347 & 0.064 & 1.000 & 0.267 & -0.564 & -0.279 & -0.147\\
+lat & -0.002 & 0.307 & -0.009 & 0.025 & 0.053 & -0.086 & 0.050 & -0.014 & 0.006 & -0.015 & 0.114 & -0.001 & 0.111 & -0.148 & 0.029 & 0.267 & 1.000 & -0.136 & 0.049 & -0.086\\
+long & 0.021 & 0.022 & 0.129 & 0.223 & 0.240 & 0.230 & 0.125 & -0.042 & -0.078 & -0.107 & 0.198 & 0.344 & -0.145 & 0.409 & -0.068 & -0.564 & -0.136 & 1.000 & 0.335 & 0.254\\
+sqft\_living15 & -0.003 & 0.585 & 0.392 & 0.569 & 0.756 & 0.145 & 0.280 & 0.086 & 0.280 & -0.093 & 0.713 & 0.732 & 0.200 & 0.326 & -0.003 & -0.279 & 0.049 & 0.335 & 1.000 & 0.183\\
+sqft\_lot15 & -0.139 & 0.082 & 0.029 & 0.087 & 0.183 & 0.719 & -0.011 & 0.031 & 0.073 & -0.003 & 0.119 & 0.194 & 0.017 & 0.071 & 0.008 & -0.147 & -0.086 & 0.254 & 0.183 & 1.000\\
+\bottomrule
+\end{tabu}
+\end{table}
+
+\hypertarget{modelo-inicial}{%
+\section{Modelo inicial}\label{modelo-inicial}}
+
+Agora que já fizemos uma análise inicial das variáveis do estudo, apresenta-se o modelo inicial abaixo, contendo todas as variáveis.
+
+O modelo apresenta coeficiente de determinação (R2) de 0.951, e R2 ajustado \((\bar{R2})\) de 0.945.
+
+Após sucessivas aplicações, testando as combinações das covariáveis e diversas análises, de tabelas e gráficas, chegamos ao modelo ajustado apresentado abaixo.
+
+\hypertarget{anuxe1lise}{%
+\section{Análise}\label{anuxe1lise}}
+
+Ao visualizar, a Figura \ref{fig:fig5}, temos o gráfico dos resíduos, onde percebe-se que todos as observações estão dentro do limite de 3 desvios padrões, e também o histograma, onde nota-se que os resíduos se assemelham a uma distribuição normal.
+
+Na Figura \ref{fig:env}, temos o envelope simulado baseado nos resíduos studentizados, com todas as observações dentro das bandas de confiança, o que sinaliza que a distribuição normal é adequada para o modelo.
+
+\hypertarget{modelo-final}{%
+\section{Modelo final}\label{modelo-final}}
+
+Agora com o modelo checado, e com boas evidências, é possivel fazer interpretações.
+O modelo apresentou \(R2=0,70\), cerca de \(70\%\) da variação de y, é
+explicado pelas covariáveis, ou seja, \(70\%\) da variação da média do preço dos imóveis é explicada pelas covariáveis. Além disso, o critério de seleção do modelo é de \((\bar{R2})\) ajustado igual a ?.
+
+Nota-se que as covariáveis influenciam positivamente na média de \(y\), e o intercepto também.
+
+\hypertarget{conclusuxe3o}{%
+\section{Conclusão}\label{conclusuxe3o}}
+
+Portanto, propõe-se um modelo de regressão linear para o banco de dados, contendo como variável resposta o preço do imóvel e outras 18 covariáveis. Aproximadamente \(70\%\) da da variação de y, é explicado pelas covariáveis, o que indica um bom ajuste do modelo.
+
+Também pode-se concluir que as covariáveis influenciam positivamente na média de \(y\), assim como o intercepto.
+
+\end{document}
