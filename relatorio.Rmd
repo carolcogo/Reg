@@ -55,33 +55,10 @@ options(digits=3)
 options(OutDec=".")
 ```
 
-```{r funções}
-
-graph=function(df,l){
-  df %>% 
-    as_tibble() %>% 
-      ggplot(aes(as.numeric(row.names(df  %>% as_tibble())),value))+
-      geom_point(color="red")+
-      geom_hline(yintercept=l, linetype="dashed", color = "navy")+
-      geom_hline(yintercept=-l, linetype="dashed", color = "navy")+
-      labs(x="Índice")
-    
-}
-graph2=function(df,l){
-  df %>% 
-    as_tibble() %>% 
-      ggplot(aes(as.numeric(row.names(df  %>% as_tibble())),value))+
-      geom_point(color="red")+
-      geom_hline(yintercept=l, linetype="dashed", color = "navy")+
-      labs(x="Índice")
-    
-}
-```
-
 
 # Introdução
 
- Assim, a proposta é definir um modelo de regressão linear que seja capaz de predizer a variável y, e quanto as covariáveis influenciam na média de y. Para a validação deste modelo será utilizado critérios de seleção, gráficos, entre outros.
+A proposta é definir um modelo de regressão linear que seja capaz de predizer a variável y, e quanto as covariáveis influenciam na média de y. Para a validação deste modelo será utilizado critérios de seleção, gráficos, entre outros.
 
 ## Importando os dados
 
@@ -96,7 +73,17 @@ attach(dados)
 
 ```
 
-O banco de dados é referente ao preço dos imóveis e outras 18 informações sobre a casa, das vendas realizadas entre maio de 2014 e maio de 2015 em King County , Washington. Possui `r nrow(dados)` observações e `r ncol(dados)` variáveis, que estão descritas na Tabela \@ref(tab:tab0). 
+```{r, echo=TRUE}
+df <- dados |> 
+  select(-id, -date, -yr_renovated, -floors,
+         - sqft_basement, -zipcode) |> 
+  as_tibble() 
+
+head(df)
+attach(df)
+```
+
+O banco de dados é referente ao preço dos imóveis e outras 18 informações sobre a casa, das vendas realizadas entre maio de 2014 e maio de 2015 em King County, Washington. Possui `r nrow(dados)` observações e `r ncol(dados)` variáveis, que estão descritas na Tabela \@ref(tab:tab0). 
 
 \begin{table}[H]
 \caption{Descrição da váriaveis}\label{tab:tab0}
@@ -145,149 +132,88 @@ long & Longitude\\
 \hline
 sqft_living15 & A metragem quadrada do espaço habitacional inferior para os 15 vizinhos mais próximos\\
 \hline
-sqft_lot15 & a metragem quadrada dos terrenos dos 15 vizinhos mais próximos\\
+sqft_lot15 & A metragem quadrada dos terrenos dos 15 vizinhos mais próximos\\
 \hline
-
 \end{tabular}
 \end{table}
 
+# Ajuste do modelo 
 
-# Análise descritiva
+```{r modinicial, echo=true, include=TRUE}
+fit_a= lm(price ~ ., data = df)
 
-Podemos avaliar pela Tabela \@ref(tab:tab1), um resumo das variáveis, com as medidas descritivas, contendo o valor mínimo, 1º quantil, mediana, valor médio, 3º quantil e valor máximo. É importante ressaltar, que a variável de desfecho preço dos imovéis, apresentou menor preço de 75000 dólares e preço máximo de 7700000 dólares.
-
-```{r tab1, include=TRUE, results='asis'}
- # summary(dados, digits = 2) |> 
- #  fastrep::tbl("Análise descritiva das variáveis.")
-  
+fit_a |> 
+  summary()
 ```
 
-É importante examinar a correlação entre as covariáveis, pois devemos ter uma correlação "aceitável" entre a variável resposta e as covariáveis, o que entretanto, não pode acontecer entre as covariáveis, pois afeta negativamente o método de mínimos quadrados ordinários, e também pode ocorrer multicolinearidade.
+#Dividindo o banco de dados em treino e teste
 
+```{r,echo=true, include=F, results='hide'}
+set.seed(1909)
 
-```{r tab2, include=TRUE}
-dados |> 
-  dplyr::select_if(is.numeric) |> 
-  cor() |> 
-  fastrep::tbl("Correlação entre as variáveis.")# correlacao
+df_split <- rsample::initial_split(df, prop = 0.80)
+#17290/4323/21613
+
+# usa 80% dos dados para treinamento
+df_train <- rsample::training(df_split)
+
+# usa 20% dos dados para validacao
+df_test  <-  rsample::testing(df_split)
 ```
 
 
-# Modelo inicial
+#Define o pré processamento e o modelo a ser usado
+```{r, echo=true, include=TRUE}
 
-Agora que já fizemos uma análise inicial das variáveis do estudo, apresenta-se o modelo inicial abaixo, contendo todas as variáveis.
+df_rec1 = df_train |> 
+  recipe(price ~.)  
 
+df_rl =
+  linear_reg() %>% 
+  set_engine("lm") 
 
- O modelo apresenta coeficiente de determinação (R2) de 0.951, e R2 ajustado $(\bar{R2})$ de 0.945.
-
-
-```{r modinicial, include=TRUE}
-# fit0<-lm(profit~adm+rdspend+mkt+estado, data = dados)
-# a<-summary(fit0)
-# a$coefficients |>
-#   as.data.frame() |> 
-#   rename(p.value = "Pr(>|t|)") |>
-#   mutate(p.value = case_when(
-#     p.value <= 0.001 ~ "0.001***",
-#     (0.001 < p.value & p.value <= 0.01) ~ "0.01**",
-#     (0.01 < p.value & p.value <= 0.05) ~ "0.01*",
-#     TRUE ~ as.character(round(p.value, 3))
-#   )) |>
-#   mypdf1::pdf1_tbl("Coeficientes para o modelo inicial") |> 
-#   kableExtra::footnote(general = "Signif. codes 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 ",footnote_as_chunk = T, title_format = c("italic", "underline")) 
-
-```
-
-Após sucessivas aplicações, testando as combinações das covariáveis e diversas análises, de tabelas e gráficas, chegamos ao modelo ajustado apresentado abaixo.
+df_work = workflow() |> 
+      add_model(df_rl) |> 
+      add_recipe(df_rec1) #junta tudo em lugar so
 
 
-```{r, include=F, results='hide'}
-
-
-## ajustando o modelo
-
-# fit<-lm(profit~rdspend+mkt, data = dados)
-# summary(fit)
-```
-
-```{r modfinal, include=TRUE}
-# fit<-lm(profit~rdspend+mkt, data = dados45)
-# b<-summary(fit)
-# # b$coefficients |>
-# #   as.data.frame() |> 
-# #   mutate(`Pr(>|t|)`=format.pval(`Pr(>|t|)`,eps = 0.01)) |> 
-# #   mypdf1::pdf1_tbl("Coeficientes do Modelo ajustado") |> 
-# #   kableExtra::footnote(general = "Signif. codes 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 ",footnote_as_chunk = T, title_format = c("italic", "underline"))
-# 
-# 
-# b$coefficients |>
-#   as.data.frame() |>
-#   rename(p.value = "Pr(>|t|)") |>
-#   mutate(p.value = case_when(
-#     p.value <= 0.001 ~ "0.001***",
-#     (0.001 < p.value & p.value <= 0.01) ~ "0.01**",
-#     (0.01 < p.value & p.value <= 0.05) ~ "0.01*",
-#     TRUE ~ as.character(round(p.value, 3))
-#   )) |>
-#   mypdf1::pdf1_tbl("Coeficientes para o modelo ajustado") |>
-#   kableExtra::footnote(general = "Signif. codes 0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 ",footnote_as_chunk = T, title_format = c("italic", "underline"))
-
+final_lm_res <- last_fit(df_work, df_split)
 ```
 
 # Análise 
 
 ```{r, include=F}
+collect_metrics(final_lm_res) |> 
+  select(-.estimator, -.config) |> 
+  rename(Métricas=.metric, Estimativa=.estimate) |> 
+  fastrep::tbl("Resumo dos dados de teste")
+```
 
-# residuo <- rstudent(fit)
-# 
-# g6<-residuo |> 
-#   graph(3)+
-#   labs(title ="Resíduos", x="Índice", y="Resíduos")
-# 
-# g7<-residuo |> 
-#   tibble::tibble() |> 
-#   ggplot(aes(residuo))+geom_histogram(bins = 6,fill="white", colour="black")+
-#   labs(x="Resíduo",title="Histograma dos resíduos")
+```{r}
+lm_fit <- fit(df_work, df_train) # ajusta o modelo nos dados de treino
 
-#hist(residuo) # histograma dos residuos
+
+point_plot = function(df, var){
+  df |> 
+    ggplot(aes(price, {{ var }})) +
+    geom_point()
+}
+
+# ver o comportamento das variaveis
+point_plot(df, lat) 
+
+point_plot(df,long)
 ```
 
 
-```{r fig5, include=TRUE, fig.cap="Gráficos para o resíduo e histograma"}
-# g6+g7
-```
-```{r env, include=T, results='hide', fig.cap="Gráfico de Envelope Simulado", fig.height=3.8, fig.width=6.7}
-# # envelope simulado baseado nos residuos studentizados
-# #hnp(fit,resid.type="student",halfnormal = F) # envelope simulado 
-# 
-# residuo %>% 
-#   as_tibble() %>% 
-#   ggplot(aes(sample = value)) +
-#   qqplotr::geom_qq_band(alpha = 0.5, fill="white", col="black",B=150,bandType = "boot") +
-#   qqplotr::stat_qq_line(size=0.5, linetype="dashed") + 
-#   qqplotr::stat_qq_point(size=1.3) +
-#   scale_fill_discrete("Bandtype")+
-#   labs(x = "Quantis teóricos", y = "Resíduos")
+```{r}
+#grafico de desempenho: predicao vs valores observados
+df_test |> 
+  select(price) |> 
+  bind_cols(predict(lm_fit, df_test)) |> 
+  ggplot(aes(price, .pred)) +
+  geom_point() 
+
 ```
 
-Ao visualizar, a Figura \@ref(fig:fig5), temos o gráfico dos resíduos, onde percebe-se que todos as observações estão dentro do limite de 3 desvios padrões, e também o histograma, onde nota-se que os resíduos se assemelham a uma distribuição normal.
-
-Na Figura \@ref(fig:env), temos o envelope simulado baseado nos resíduos studentizados, com todas as observações dentro das bandas de confiança, o que sinaliza que a distribuição normal é adequada para o modelo.
-
-
-# Modelo final
-
-Agora com o modelo checado, e com boas evidências, é possivel fazer interpretações.
-O modelo apresentou $R2=0,70$, cerca de $70\%$ da variação de y, é
-explicado pelas covariáveis, ou seja, $70\%$ da variação da média do preço dos imóveis é explicada pelas covariáveis. Além disso, o critério de seleção do modelo é de $(\bar{R2})$ ajustado igual a ?.
-
-
-Nota-se que as covariáveis influenciam positivamente na média de $y$, e o intercepto também.
-
-# Conclusão
-
-Portanto, propõe-se um modelo de regressão linear para o banco de dados, contendo como variável resposta o preço do imóvel e outras 18 covariáveis. Aproximadamente $70\%$ da da variação de y, é explicado pelas covariáveis, o que indica um bom ajuste do modelo. 
-
-
-Também pode-se concluir que as covariáveis influenciam positivamente na média de $y$, assim como o intercepto.
 

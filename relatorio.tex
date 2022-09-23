@@ -211,7 +211,7 @@ Assim, a proposta é definir um modelo de regressão linear que seja capaz de pr
 \end{Highlighting}
 \end{Shaded}
 
-O banco de dados é referente ao preço dos imóveis e outras 18 informações sobre a casa, das vendas realizadas entre maio de 2014 e maio de 2015 em King County , Washington. Possui 21613 observações e 21 variáveis, que estão descritas na Tabela \ref{tab:tab0}.
+O banco de dados é referente ao preço dos imóveis e outras 18 informações sobre a casa, das vendas realizadas entre maio de 2014 e maio de 2015 em King County, Washington. Possui 21613 observações e 21 variáveis, que estão descritas na Tabela \ref{tab:tab0}.
 
 \begin{table}[H]
 \caption{Descrição da váriaveis}\label{tab:tab0}
@@ -262,16 +262,32 @@ sqft_living15 & A metragem quadrada do espaço habitacional inferior para os 15 
 \hline
 sqft_lot15 & a metragem quadrada dos terrenos dos 15 vizinhos mais próximos\\
 \hline
-
 \end{tabular}
 \end{table}
-
-=`'floors',`waterfront',`view',`condition', `grade', `sqft\_lot15')
 
 \hypertarget{anuxe1lise-descritiva}{%
 \section{Análise descritiva}\label{anuxe1lise-descritiva}}
 
 Podemos avaliar pela Tabela \ref{tab:tab1}, um resumo das variáveis, com as medidas descritivas, contendo o valor mínimo, 1º quantil, mediana, valor médio, 3º quantil e valor máximo. É importante ressaltar, que a variável de desfecho preço dos imovéis, apresentou menor preço de 75000 dólares e preço máximo de 7700000 dólares.
+
+\begin{table}[H]
+
+\caption{\label{tab:tab1}Análise descritiva das variáveis.}
+\centering
+\begin{tabu} to \linewidth {>{\raggedright}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+  &       id &     date &     price &    bedrooms &   bathrooms &  sqft\_living &    sqft\_lot &     floors &   waterfront &      view &   condition &     grade &   sqft\_above & sqft\_basement &    yr\_built &  yr\_renovated &    zipcode &      lat &      long & sqft\_living15 &   sqft\_lot15\\
+\midrule
+ & Min.   :1.0e+06 & Length:21613 & Min.   :  75000 & Min.   : 0.0 & Min.   :0.0 & Min.   :  290 & Min.   :    520 & Min.   :1.0 & Min.   :0.000 & Min.   :0.00 & Min.   :1.0 & Min.   : 1.0 & Min.   : 290 & Min.   :   0 & Min.   :1900 & Min.   :   0 & Min.   :98001 & Min.   :47 & Min.   :-122 & Min.   : 399 & Min.   :   651\\
+ & 1st Qu.:2.1e+09 & Class :character & 1st Qu.: 321950 & 1st Qu.: 3.0 & 1st Qu.:1.8 & 1st Qu.: 1427 & 1st Qu.:   5040 & 1st Qu.:1.0 & 1st Qu.:0.000 & 1st Qu.:0.00 & 1st Qu.:3.0 & 1st Qu.: 7.0 & 1st Qu.:1190 & 1st Qu.:   0 & 1st Qu.:1951 & 1st Qu.:   0 & 1st Qu.:98033 & 1st Qu.:48 & 1st Qu.:-122 & 1st Qu.:1490 & 1st Qu.:  5100\\
+ & Median :3.9e+09 & Mode  :character & Median : 450000 & Median : 3.0 & Median :2.2 & Median : 1910 & Median :   7618 & Median :1.5 & Median :0.000 & Median :0.00 & Median :3.0 & Median : 7.0 & Median :1560 & Median :   0 & Median :1975 & Median :   0 & Median :98065 & Median :48 & Median :-122 & Median :1840 & Median :  7620\\
+ & Mean   :4.6e+09 & NA & Mean   : 540088 & Mean   : 3.4 & Mean   :2.1 & Mean   : 2080 & Mean   :  15107 & Mean   :1.5 & Mean   :0.008 & Mean   :0.23 & Mean   :3.4 & Mean   : 7.7 & Mean   :1788 & Mean   : 292 & Mean   :1971 & Mean   :  84 & Mean   :98078 & Mean   :48 & Mean   :-122 & Mean   :1987 & Mean   : 12768\\
+ & 3rd Qu.:7.3e+09 & NA & 3rd Qu.: 645000 & 3rd Qu.: 4.0 & 3rd Qu.:2.5 & 3rd Qu.: 2550 & 3rd Qu.:  10688 & 3rd Qu.:2.0 & 3rd Qu.:0.000 & 3rd Qu.:0.00 & 3rd Qu.:4.0 & 3rd Qu.: 8.0 & 3rd Qu.:2210 & 3rd Qu.: 560 & 3rd Qu.:1997 & 3rd Qu.:   0 & 3rd Qu.:98118 & 3rd Qu.:48 & 3rd Qu.:-122 & 3rd Qu.:2360 & 3rd Qu.: 10083\\
+\addlinespace
+ & Max.   :9.9e+09 & NA & Max.   :7700000 & Max.   :33.0 & Max.   :8.0 & Max.   :13540 & Max.   :1651359 & Max.   :3.5 & Max.   :1.000 & Max.   :4.00 & Max.   :5.0 & Max.   :13.0 & Max.   :9410 & Max.   :4820 & Max.   :2015 & Max.   :2015 & Max.   :98199 & Max.   :48 & Max.   :-121 & Max.   :6210 & Max.   :871200\\
+\bottomrule
+\end{tabu}
+\end{table}
 
 É importante examinar a correlação entre as covariáveis, pois devemos ter uma correlação ``aceitável'' entre a variável resposta e as covariáveis, o que entretanto, não pode acontecer entre as covariáveis, pois afeta negativamente o método de mínimos quadrados ordinários, e também pode ocorrer multicolinearidade.
 
